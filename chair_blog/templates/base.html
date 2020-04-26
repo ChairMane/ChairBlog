@@ -1,0 +1,63 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"  type='text/css'>
+{% load static %}
+
+<!-- Navbar here -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="{% url 'index' %}">ChairBlog</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.view_name == 'index' %}active{% endif %}" href="{% url 'index' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.view_name == 'project_index' %}active{% endif %}" href="{% url 'project_index' %}">Projects </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.view_name == 'blog_index' %}active{% endif %}" href="{% url 'blog_index' %}">Blog </a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="get"> 
+          <input class="form-control mr-sm-2" type="text" name="q" placeholder="Search" aria-label="Search">
+          <button class="btn my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+<!-- Jumbotron stuff here -->
+<div class="jumbotron d-flex align-items-center" style="margin-top: 56px;">
+  <div class="container text-center">
+    {% block jumbo_content %}
+
+    {% endblock %}
+  </div>
+</div>
+
+<!-- Main content goes here -->
+<div class="container" style="padding-bottom: 200px;">
+    {% block page_content %}{% endblock %}
+</div>
+
+<!-- Footere here -->
+<footer style="position: relative;">
+  <div class= "page-footer bg-dark" style="padding-top: 20px; margin-top: 50px;">
+      <div class="container" style="display: flex; justify-content: center;">
+        <div class= "row">
+          <div class="mb-10 flex-center">
+            <a class="github" href="https://github.com/ChairMane"><i class="fa fa-github-square fa-2x"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright text-center py-3" style="color: white;">Chair Birds Co.</div>
+  </div>  
+</footer>
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>

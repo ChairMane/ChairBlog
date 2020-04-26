@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block jumbo_content %}
+    <h1 class="display-4">Chair Blog</h1>
+    <p class="lead">I am a Python developer that loves birds.</p>
+{% endblock %}
+
+{% block page_content %}
+	<div class="col">
+		{% for page in pages %}
+		<div class="row-md-2" >
+			<div class="card mb-4">
+	            <div class="card-body">
+	                <h1 class="card-title">{{ page.title }}</h1>
+	                <p class="card-text">{{ page.short_description }}</p>
+	                <a href="{% url page.page_url %}"
+	                   class="btn btn-primary">
+	                    Read More
+	                </a>
+	            </div>
+        	</div>
+		</div>
+		{% endfor %}
+	</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block jumbo_content %}
+    <h1 class="display-4">{{ project.title }}</h1>
+    <p class="lead">{{ project.short_description }}</p>
+{% endblock %}
+
+{% block page_content %}
+<link rel="stylesheet" type="test/css" href="{% static 'default.css' %}">
+<div class="row">
+    <div class="col">
+        <h5>About the project:</h5>
+        <p>{{ project.formatted_markdown|safe|linebreaks }}</p>
+        <br>
+        <h5>Project Link</h5>
+        <a href="{{  project.project_link }}" class="btn btn-primary" >Github</a>
+    </div>
+</div>
+{% endblock %}
