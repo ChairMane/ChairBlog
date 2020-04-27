@@ -4,6 +4,7 @@ from django.db.models import Q
 from blog.models import Post, Comment
 from django.views.generic import ListView
 from .forms import CommentForm
+import pdb
 
 def blog_index(request):
 	posts = Post.objects.all().order_by('-created_on')
@@ -51,14 +52,18 @@ def blog_detail(request, pk):
 	}
 	return render(request, 'blog_detail.html', context)
 
+def search_posts(request):
+	query = request.GET.get('q', '')
 
-class SearchResultsView(ListView):
-	model = Post
-	template_name = 'search.html'
+	if query:
+		queryset = (Q(title__icontains=query) | Q(body__icontains=query))
+		results = Post.objects.filter(queryset).distinct()
+	else:
+		results = []
 
-	def get_queryset(self):
-		query = self.request.GET.get('q')
-		object_list = Post.objects.filter(
-			Q(title__icontains=query) | Q(body__icontains=query)
-		)
-		return object_list
+	context = {
+		'results' : results,
+		'query' : query
+	}
+
+	return render(request, 'search.html', context)
