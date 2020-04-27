@@ -21,7 +21,7 @@
 			</a>&nbsp;
 		{% endfor %}
 	</small>
-	<p>{{ post.formatted_markdown|safe| slice:":400" }}...</p>
+	<p>{{ post.formatted_markdown|striptags|slice:":400" }}...</p>
 	<hr>
 	{% endfor %}
 		<div class="pagination">

@@ -52,18 +52,15 @@ def blog_detail(request, pk):
 	}
 	return render(request, 'blog_detail.html', context)
 
-def search_posts(request):
-	query = request.GET.get('q', '')
 
-	if query:
-		queryset = (Q(title__icontains=query) | Q(body__icontains=query))
-		results = Post.objects.filter(queryset).distinct()
-	else:
-		results = []
+class SearchResultsView(ListView):
+    model = Post
+    template_name = 'search.html'
 
-	context = {
-		'results' : results,
-		'query' : query
-	}
+    def get_queryset(self): # new
+        query = self.request.GET.get('q')
+        object_list= Post.objects.filter(
+            Q(title__icontains=query) | Q(body__icontains=query)
+        )
 
-	return render(request, 'search.html', context)
+        return object_list
